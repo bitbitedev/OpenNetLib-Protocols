@@ -1,6 +1,6 @@
 # OpenNetLib - A Java Networking Library
 
-[![Build](https://github.com/bitbitedev/OpenNetLib-Protocols/actions/workflows/gradle.yml/badge.svg)](https://github.com/bitbitedev/OpenNetLib-Protocols/actions/workflows/gradle.yml)
+[![Build](https://github.com/bitbitedev/OpenNetLib-Protocols/actions/workflows/build.yml/badge.svg)](https://github.com/bitbitedev/OpenNetLib-Protocols/actions/workflows/build.yml)
 [![Version](https://img.shields.io/github/v/release/bitbitedev/OpenNetLib-Protocols?include_prereleases)](https://github.com/bitbitedev/OpenNetLib-Protocols/releases)
 [![Discord channel](https://img.shields.io/discord/411109318511820800?logo=discord)](https://discord.gg/MdsuFg2bPC)
 
