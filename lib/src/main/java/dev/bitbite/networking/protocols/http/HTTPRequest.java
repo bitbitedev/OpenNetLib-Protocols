@@ -7,45 +7,78 @@ import dev.bitbite.networking.protocols.Request;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Represents an HTTP request.
+ */
 public class HTTPRequest extends Request {
 
+	/**
+	 * The request header.
+	 */
 	@Getter @Setter private String requestHeader;
+
+	/**
+	 * The session associated with the request.
+	 */
 	@Getter @Setter private Session session;
+
+	/**
+	 * The list of cookies sent with the request.
+	 */
 	@Getter private ArrayList<Cookie> cookies;
+
+	/**
+	 * The options specified in the request.
+	 */
 	@Getter private HashMap<String, String> options;
+
+	/**
+	 * The response headers to be sent back.
+	 */
 	@Getter private ArrayList<String> responseHeaders;
-	
+
+	/**
+	 * Creates a new HTTPRequest object with the specified client address.
+	 *
+	 * @param clientAddress The client address.
+	 */
 	public HTTPRequest(String clientAddress) {
-        super(clientAddress);
+		super(clientAddress);
 		this.cookies = new ArrayList<Cookie>();
 		this.options = new HashMap<String, String>();
 		this.responseHeaders = new ArrayList<String>();
 	}
-	
+
+	/**
+	 * Checks if the request is valid.
+	 *
+	 * @return true if the request is valid, false otherwise.
+	 */
 	public boolean isValid() {
 		return requestHeader.startsWith("GET");
 	}
-	
+
+	/**
+	 * Adds an option to the request.
+	 *
+	 * @param content The option content.
+	 */
 	public void addOption(String content) {
 		String[] parts = content.split(":");
-		//check if request contains cookies
-		if(parts[0].startsWith("Cookie")) { 
+		if (parts[0].startsWith("Cookie")) {
 			this.cookies.addAll(Cookie.parse(parts[1]));
-			if(this.cookies.size() > 0) {
-				//looking for active sessions
-				for(var cookie : cookies) { 
-					if(cookie.getName().contentEquals("SESSION_ID")) {
-						// looking if session exists on serverside
-						this.session = SessionStorage.get(cookie.getValue()); 
-						if(this.session == null) {
-							//setting http header to delete the session id cookie on clientside
-							responseHeaders.add("Set-Cookie: SESSION_ID=0; Max-Age=0"); 
+			if (this.cookies.size() > 0) {
+				for (var cookie : cookies) {
+					if (cookie.getName().contentEquals("SESSION_ID")) {
+						this.session = SessionStorage.get(cookie.getValue());
+						if (this.session == null) {
+							responseHeaders.add("Set-Cookie: SESSION_ID=0; Max-Age=0");
 						}
 					}
 				}
 			}
 		} else {
-			if(parts.length == 1) {
+			if (parts.length == 1) {
 				System.out.println(content);
 			} else {
 				this.options.put(parts[0], parts[1]);
@@ -53,16 +86,30 @@ public class HTTPRequest extends Request {
 		}
 	}
 
+	/**
+	 * Gets the HTTP method of the request.
+	 *
+	 * @return The HTTP method.
+	 */
 	public String getMethod() {
 		return this.requestHeader.split(" ")[0];
 	}
-	
+
+	/**
+	 * Gets the requested path of the request.
+	 *
+	 * @return The requested path.
+	 */
 	public String getRequestedPath() {
 		return this.requestHeader.split(" ")[1].substring(1);
 	}
-	
-	public String getProtocoll() {
+
+	/**
+	 * Gets the protocol of the request.
+	 *
+	 * @return The protocol.
+	 */
+	public String getProtocol() {
 		return this.requestHeader.split(" ")[2];
 	}
-	
 }
