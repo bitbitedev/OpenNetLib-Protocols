@@ -1,4 +1,4 @@
-# OpenNetLib - A Java Networking Library
+# OpenNetLib-Protocols - An extension for OpenNetLib
 
 [![Build](https://github.com/bitbitedev/OpenNetLib-Protocols/actions/workflows/build.yml/badge.svg)](https://github.com/bitbitedev/OpenNetLib-Protocols/actions/workflows/build.yml)
 [![Version](https://img.shields.io/github/v/release/bitbitedev/OpenNetLib-Protocols?include_prereleases)](https://github.com/bitbitedev/OpenNetLib-Protocols/releases)
