@@ -18,7 +18,7 @@ To use it unpack the archive file and add the Jar file to your projects dependen
 ### Gradle
 If you are using gradle add the following line to your dependencies:
 ```
-implementation 'dev.bitbite:OpenNetLib-protocols:0.0.1'
+implementation 'dev.bitbite:OpenNetLib-Protocols:0.0.1'
 ```
 
 ### Maven
