@@ -6,3 +6,6 @@ build
 
 # Ignore IDE-specific files
 .vscode
+
+secring.gpg
+gradle.properties

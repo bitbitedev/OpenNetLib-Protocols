@@ -1,10 +1,12 @@
 plugins {
-    // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
+group = 'dev.bitbite'
+version = '0.0.1'
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
@@ -26,9 +28,69 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+    withJavadocJar()
+    withSourcesJar()
 }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId = 'dev.bitbite'
+            artifactId = 'OpenNetLib-Protocols'
+			      version = '0.0.1'
+            pom {
+                name = 'OpenNetLib-Protocols'
+                description = 'OpenNetLib-Protocols is a library that provides a set of protocols for OpenNetLib'
+                url = 'https://github.com/bitbitedev/OpenNetLib-Protocols'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/bitbitedev/OpenNetLib-Protocols/blob/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'bitbite'
+                        name = 'Bitbite Team'
+                        email = 'team@bitbite.dev'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/bitbitedev/OpenNetLib-Protocols.git'
+                    url = 'https://github.com/bitbitedev/OpenNetLib-Protocols'
+                }
+            }
+
+        }
+    }
+    repositories {
+    	maven {
+            name = "OSSRH"
+    		credentials {
+    			username = System.getenv("MAVEN_USERNAME")
+    			password = System.getenv("MAVEN_PASSWORD")
+    		}
+    		def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+    		def snapshotRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+    		url = version.endsWith('SNAPSHOT') ? snapshotRepoUrl : releasesRepoUrl
+    	}
+    }
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+signing {
+    sign publishing.publications.maven
+}
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
