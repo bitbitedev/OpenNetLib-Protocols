@@ -4,7 +4,7 @@ plugins {
     id 'signing'
 }
 group = 'dev.bitbite'
-version = '0.0.1'
+version = '0.0.2'
 
 repositories {
     mavenCentral()
@@ -43,7 +43,7 @@ publishing {
             from components.java
             groupId = 'dev.bitbite'
             artifactId = 'OpenNetLib-Protocols'
-			      version = '0.0.1'
+			      version = '0.0.2'
             pom {
                 name = 'OpenNetLib-Protocols'
                 description = 'OpenNetLib-Protocols is a library that provides a set of protocols for OpenNetLib'
