@@ -5,7 +5,7 @@
 [![Discord channel](https://img.shields.io/discord/411109318511820800?logo=discord)](https://discord.gg/MdsuFg2bPC)
 
 `OpenNetLib-Protocols` is a extension for `OpenNetLib` that provides a set of predefined protocols to use with the library. It is a part of the `OpenNetLib` project.
-Start using `OpenNetLib-Protocols` today or help improving it by posting issues, questions and feature requests [here](https://github.com/bitbitedev/OpenNetLib/issues).
+Start using `OpenNetLib-Protocols` today or help improving it by posting issues, questions and feature requests [here](https://github.com/bitbitedev/OpenNetLib-Protocols/issues).
 
 ---
 
